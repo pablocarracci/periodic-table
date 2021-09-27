@@ -1,0 +1,71 @@
+body {
+    font-family: 'DM Sans', sans-serif;
+    color: #f1f5f6;
+    background-color: #202e38;
+}
+
+header {
+    text-align: center;
+}
+
+header h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin: 2em auto 0;
+}
+
+header h5 {
+    font-size: 1.3em;
+    font-weight: 400;
+    margin: 0 auto 2em;
+}
+
+#table {
+    display: grid;
+    grid-template-columns: repeat(9, 100px);
+    grid-template-rows: repeat(4, 100px);
+    grid-gap: 10px;
+    margin: auto;
+    max-width: 1200px;
+    justify-content: center;
+}
+
+.item {
+    padding: 3px;
+    width: 94px;
+    height: 94px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.item:hover {
+    transform: scale(1.1);
+}
+
+.item-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+    padding-left: 20px;
+    width: 74px;
+    height: 94px;
+    border-radius: 3px;
+    background-color: #202e38;
+    transition: all 0.3s ease;
+}
+
+.item-inner:hover, .highlight {
+    background-color: transparent;
+    color: #222;
+}
+
+.title {
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.description {
+    font-size: 12px;
+    margin-top: -0.2em;
+}
