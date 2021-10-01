@@ -4,6 +4,8 @@ function main() {
 
     const groups = [...new Set(companies.map(c => c.Grupo))];
     renderLegend(groups);
+
+    setEventListeners();
 }
 
 function renderTable(companies) {
@@ -22,22 +24,23 @@ function createTableItem(company) {
     tableItem.style.gridColumn = company.Coluna;
     tableItem.style.color = company.Cor;
     tableItem.style.backgroundColor = company.Cor;
+    tableItem.addEventListener('click', () => onTableItemClicked(company));
 
     let tableItemInner = document.createElement('div');
     tableItemInner.className = 'table-item-inner';
     tableItemInner.classList.add(toAttr(company.Grupo));
 
+    let shortTitle = document.createElement('div');
+    shortTitle.className = 'short-title';
+    shortTitle.innerHTML = company.Abreviacao;
+
     let title = document.createElement('div');
     title.className = 'title';
-    title.innerHTML = company.Abreviacao;
-
-    let description = document.createElement('div');
-    description.className = 'description';
-    description.innerHTML = company.Nome;
+    title.innerHTML = company.Nome;
 
     tableItem.appendChild(tableItemInner);
+    tableItemInner.appendChild(shortTitle);
     tableItemInner.appendChild(title);
-    tableItemInner.appendChild(description);
 
     return tableItem;
 }
@@ -50,7 +53,7 @@ function createLegendItem(group) {
     let checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.id = toAttr(group);
-    checkbox.onclick = function () { onLegendItemClicked(this) };
+    checkbox.addEventListener('click', (e) => onLegendItemClicked(e.target));
 
     let marker = document.createElement('div');
     marker.className = 'legend-item-marker';
@@ -66,6 +69,20 @@ function createLegendItem(group) {
     legendItem.appendChild(label);
 
     return legendItem;
+}
+
+/** Handles table item click. */
+function onTableItemClicked(company) {
+    title = document.querySelector('.modal-title');
+    title.style.color = company.Cor;
+    title.innerHTML = company.Nome;
+
+    let group = document.querySelector('.modal-group');
+    group.style.color = company.Cor;
+    group.innerHTML = company.Grupo;
+
+    document.querySelector('.modal-description').innerHTML = company.Descricao;
+    document.querySelector('.modal').style.display = 'flex';
 }
 
 /** Handles legend item click. */
@@ -99,27 +116,21 @@ function toAttr(string) {
     return string.replaceAll(' ', '-').toLowerCase();
 }
 
+/** Sets event listeners for closing modal. */
+function setEventListeners() {
+    window.addEventListener('click', (e) => closeModal(e));
+    document.addEventListener('keydown', (e) => closeModal(e));
+}
+
+function closeModal(e) {
+    const target = e.target.className;
+    if (target === 'modal' || target === 'modal-close' || e.key === 'Escape') {
+        document.querySelector('.modal').style.display = 'none';
+    }
+}
 
 function getData() {
     return [
-        {
-            "Abreviacao": "T1",
-            "Coluna": 4,
-            "Cor": "#FFF",
-            "Descricao": "Sailfish tiger shovelnose catfish Celebes rainbowfish sailfish threespine stickleback codling Atlantic trout salmon cuchia guitarfish swordfish sucker shortnose sucker. Bangus chain pickerel pineconefish cowfish rocket danio. Grunt sculpin sea dragon, glass catfish menhaden yellowtail barracuda ghost flathead demoiselle sandperch eel yellow moray swampfish. Sand goby sand tilefish orbicular batfish. Shortnose greeneye.",
-            "Grupo": "Grupo Teste",
-            "Linha": 1,
-            "Nome": "Teste 1"
-        },
-        {
-            "Abreviacao": "T2",
-            "Coluna": 6,
-            "Cor": "#FFF",
-            "Descricao": "Sailfish tiger shovelnose catfish Celebes rainbowfish sailfish threespine stickleback codling Atlantic trout salmon cuchia guitarfish swordfish sucker shortnose sucker. Bangus chain pickerel pineconefish cowfish rocket danio. Grunt sculpin sea dragon, glass catfish menhaden yellowtail barracuda ghost flathead demoiselle sandperch eel yellow moray swampfish. Sand goby sand tilefish orbicular batfish. Shortnose greeneye.",
-            "Grupo": "Grupo Teste",
-            "Linha": 1,
-            "Nome": "Teste 2"
-        },
         {
             "Abreviacao": "Li",
             "Coluna": 1,

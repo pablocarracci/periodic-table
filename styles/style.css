@@ -12,7 +12,8 @@ header {
 header h1 {
     font-size: 3.5vmax;
     font-weight: 700;
-    margin: 2em auto 0;
+    margin-top: 0px;
+    padding: 1em 1em 0px 1em;
 }
 
 header h5 {
@@ -39,7 +40,7 @@ header h5 {
     padding: 3px;
     width: 94px;
     height: 94px;
-    border-radius: 5px;
+    border-radius: 12px;
     transition: all 0.3s ease;
     cursor: pointer;
 }
@@ -55,7 +56,7 @@ header h5 {
     padding-left: 20px;
     width: 74px;
     height: 94px;
-    border-radius: 3px;
+    border-radius: 9px;
     background-color: #202e38;
     transition: all 0.3s ease;
 }
@@ -65,12 +66,12 @@ header h5 {
     color: #222;
 }
 
-.title {
+.short-title {
     font-size: 35px;
     font-weight: 700;
 }
 
-.description {
+.title {
     font-size: 12px;
     margin-top: -0.2em;
 }
@@ -93,7 +94,7 @@ header h5 {
     margin: 5px;
     padding: 5px;
     border: 1px dashed transparent;
-    border-radius: 5px;
+    border-radius: 12px;
 }
 
 .legend-item label {
@@ -101,16 +102,63 @@ header h5 {
 }
 
 .selected {
-    border: dashed 1px #f1f5f6;
+    border: 1px dashed #f1f5f6;
 }
 
 .legend-item-marker {
     width: 20px;
     height: 20px;
-    border-radius: 3px;
+    border-radius: 6px;
     margin-right: 5px;
 }
 
 input[type="checkbox"] {
     display: none;
+}
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+}
+
+.modal-content {
+    color: #222;
+    background-color: #fff;
+    height: fit-content;
+    max-height: 90%;  
+    max-width: 500px;
+    margin: 1rem;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 25px 0 rgb(46 61 73 / 20%);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.modal-group {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+}
+
+.modal-close {
+    font-size: 1.5rem;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
 }
